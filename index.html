@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Full page and multi scroll effects</title>
+    <meta name="description" content="Simple javascript plugin for full page and multi scroll effect">
+    <meta name="keywords" content="full page, multi scroll, plugin, javascript, scrolling effect, full screen">
+
+    <style>
+    	/* http://meyerweb.com/eric/tools/css/reset/ 
+		   v2.0 | 20110126
+		   License: none (public domain)
+		*/
+
+		html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed, 
+		figure, figcaption, footer, header, hgroup, 
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+
+		/* HTML5 display-role reset for older browsers */
+		article, aside, details, figcaption, figure, 
+		footer, header, hgroup, menu, nav, section {
+			display: block;
+		}
+
+		body {
+			line-height: 1;
+		    font-family: Raleway,"Helvetica Neue",Helvetica,Arial,sans-serif;
+		}
+
+		ol, ul {
+			margin-left: 2em;
+		}
+
+		blockquote, q {
+			quotes: none;
+		}
+
+		blockquote:before, blockquote:after,
+		q:before, q:after {
+			content: '';
+			content: none;
+		}
+
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+        h1, h2 {           
+            font-weight: 600;           
+        }
+
+        h1 {
+        	font-size: 1.3rem;
+        }
+
+        h2 {
+        	font-size: 1.2rem;
+        }
+
+        p.highlighted {
+        	border: 1px dashed #ccc;
+        	padding: 15px;
+        	margin: 10px;
+        }
+
+		.clear:before,
+		.clear:after {
+		    content: " ";
+		    display: table;
+		}
+
+		.clear:after {
+		    clear: both;
+		}
+
+		header, section {
+			padding: 25px;
+		}
+
+		section {
+			line-height: 1.8rem;
+		}
+
+        header img {
+            float: left;
+        }
+
+        header h1 {
+        	float: right;
+        }
+    </style>
+
+    <!--[if lt IE 9]>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+	<![endif]-->
+	<script type="text/javascript">
+        WebFontConfig = function () {
+            function createEvent(eventName) {
+                var event;
+                
+                if (typeof window.CustomEvent === 'function') {
+                    event = new CustomEvent(eventName);
+                } else if (document.createEvent) {
+                    event = document.createEvent('HTMLEvents');
+                    event.initEvent(eventName, true, true);
+                } else if(document.createEventObject){// IE < 9
+                    event = document.createEventObject();
+                    event.eventType = eventName;
+                }
+                
+                return event;
+            }
+            
+            function dispatchEvent(el, event) {
+                if (el.dispatchEvent){
+                    el.dispatchEvent(event);
+                } else if(el.fireEvent && htmlEvents['on'+eventName]){// IE < 9
+                    el.fireEvent('on'+event.eventType,event);// can trigger only a real event (e.g. 'click')
+                } else if(el[eventName]){
+                    el[eventName]();
+                } else if(el['on'+eventName]){
+                    el['on'+eventName]();
+                }
+            }
+            
+            return {active: function() {var event = createEvent("font-active");dispatchEvent(document, event);},google:{families:["Raleway:100,100i,200,200i,300,300i,400,400i,600,600i,800,800i"]},custom:{families:["Aramis"],urls:["\/\/cdn-na.mynilead.com\/assets\/libs\/nilead.font\/aramis-800\/stylesheets\/aramis-800.css"]}};
+        }();
+    </script>
+	<script src="//ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript" async></script>
+
+</head>	
+<body>
+
+	<header class="clear">
+		<img src="../nilead.png" alt="Nilead website design and development services" />
+
+		<h1>Full page and multi scroll - A Nilead experiment</h1>
+	</header>
+
+	<section>
+		<h2>Introduction</h2>
+
+		<p>This is a simple javascript/stylesheet plugin to create the full page and multi scroll effects.</p>
+
+		This plugin was inspired by 2 modules on <a href="http://alvarotrigo.com" target="_blank">Alvaro Trigo</a>
+
+		<ol>
+			<li>Full page plugin to create full page scrolling effect</li>
+			<li>Multi scroll plugin to create split screen scrolling effect</li>
+		</ol>
+
+		We wanted to use both of these modules on one single web page which we were able to do by hacking around a bit. The result was rather hackish so we decided to create our own plugin that:
+
+		<ol>
+			<li>Supports both full page and multi scroll</li>
+			<li>Lightweight with the base essential fatures (no dependency on any library such as jQuery)</li>
+			<li>Supports only modern browsers to keep things simple (old browsers such as IE9 and older may not work)</li>
+		</ol>
+
+
+		<h2>Demo</h2>
+		To see how it works, check the short video clip below:
+
+		Check the demo page to see how it's working on your browser.
+
+
+		<h2>Instruction</h2>
+		This module is really simple and we try to comment in the code as much as we can, please use the source code as your documents.
+
+
+		<h2>License</h2>
+		This module is released under MIT license. 
+		<p class="highlighted">
+		Copyright (c) 2017 Nilead<br>
+
+		Permission is hereby granted, free of charge, to any person obtaining a copy
+		of this software and associated documentation files (the "Software"), to deal
+		in the Software without restriction, including without limitation the rights
+		to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+		copies of the Software, and to permit persons to whom the Software is
+		furnished to do so, subject to the following conditions:<br>
+
+		The above copyright notice and this permission notice shall be included in
+		all copies or substantial portions of the Software.<br>
+
+		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+		IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+		FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+		AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+		LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+		OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+		THE SOFTWARE.
+		</p>
+	</section>
+</body>
