@@ -1,3 +1,11 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+}
+
 .scroll-container {
     position: relative;
     height: 100%;
