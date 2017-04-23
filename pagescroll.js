@@ -187,11 +187,7 @@
                 var index = 0;
                 [].forEach.call(frameContainer.children, function (child) {
                     var className = 'frame-' + index ++;
-                    if (child.classList) {
-                        child.classList.add(className);
-                    } else {
-                        child.className += " " + className;
-                    }
+                    addClass(child, className);
                 });
             });
 
@@ -215,7 +211,7 @@
 
         do {
             parent = parent.parentElement;
-        } while (parent && ! parent.classList.contains('frame-container'));
+        } while (parent && ! hasClass(parent, 'frame-container'));
 
         return parent;
     };
@@ -232,6 +228,7 @@
         return container.getElementsByClassName("frame-" + index);
     };
 
+    // Helper functions
     function debounce (func, wait, immediate, scope) {
         var timeout;
 
@@ -250,6 +247,36 @@
                 func.apply(context, args);
             }
         };
+    }
+
+    function hasClass (elem, className) {
+        if (elem.classList) {
+            return elem.classList.contains(className);
+        } else if (elem.className) {
+            return ! ! elem.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+        }
+
+        return false;
+    }
+
+    function addClass (elem, className) {
+        // support multiple classes
+        var classNames = className.split(' ');
+
+        if (elem.classList) {
+            for (var j = 0; j < classNames.length; j ++) {
+                elem.classList.add(classNames[j]);
+            }
+        } else if (elem.className) {
+            for (var k = 0; k < classNames.length; k ++) {
+                elem.className = elem
+                    .className
+                    .split(' ')
+                    .filter(function (name) {
+                        return name !== classNames[k];
+                    }).join(' ');
+            }
+        }
     }
 
     // expose to root
