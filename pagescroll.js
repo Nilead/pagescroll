@@ -1,5 +1,5 @@
 /**
- * Slim scroller to support fullpage and multiscroll
+ * Slim PageScroll to support fullpage and PageScroll
  *
  * @constructor
  */
@@ -16,7 +16,7 @@
     /** Used as a reference to the global object. */
     var root = freeGlobal || freeSelf || Function('return this')();
 
-    function Scroller(container) {
+    function PageScroll(container) {
         this.container = container || document;
         this.scrolling = false;
         this.currentContainer = null;
@@ -24,13 +24,13 @@
         this.currentCount = - 1;
     }
 
-    Scroller.prototype.scrollCurrent = function (dir) {
+    PageScroll.prototype.scrollCurrent = function (dir) {
         if (this.currentContainer) {
             this.scroll(this.currentContainer, dir);
         }
     };
 
-    Scroller.prototype.scroll = function (container, dir) {
+    PageScroll.prototype.scroll = function (container, dir) {
         if (this.scrolling) {
             return;
         }
@@ -102,7 +102,7 @@
 
     };
 
-    Scroller.prototype.init = function (customOptions, callback) {
+    PageScroll.prototype.init = function (customOptions, callback) {
 
         var options = {
             beforeTrigger: null,
@@ -150,12 +150,12 @@
                 }.bind(this), {passive: false});
             },
             swipeListener: function (container) {
-                // use our swiper helper if available
-                if (typeof nuSwiper == 'function') {
+                // use our swipe helper if available
+                if (typeof nuSwipe == 'function') {
 
-                    var swiper = new nuSwiper();
+                    var swipe = new nuSwipe();
 
-                    swiper.on(container);
+                    swipe.on(container);
 
                     container.addEventListener('swipedown', function (event) {
                         this.scroll(container, 'forward');
@@ -210,7 +210,7 @@
 
     };
 
-    Scroller.prototype.getCurrentFrame = function (target) {
+    PageScroll.prototype.getCurrentFrame = function (target) {
         var parent = target;
 
         do {
@@ -220,15 +220,15 @@
         return parent;
     };
 
-    Scroller.prototype.isFirstFrame = function () {
+    PageScroll.prototype.isFirstFrame = function () {
         return 0 == this.currentIndex;
     };
 
-    Scroller.prototype.isLastFrame = function () {
+    PageScroll.prototype.isLastFrame = function () {
         return this.currentCount == this.currentIndex;
     };
 
-    Scroller.prototype.getContainerFrames = function (container, index) {
+    PageScroll.prototype.getContainerFrames = function (container, index) {
         return container.getElementsByClassName("frame-" + index);
     };
 
@@ -253,5 +253,5 @@
     }
 
     // expose to root
-    root.nuScroller = Scroller;
+    root.nuPageScroll = PageScroll;
 }());
